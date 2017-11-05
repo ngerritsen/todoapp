@@ -1,0 +1,76 @@
+<title>TodoApp</title>
+<link rel="stylesheet" href="https://cdn.shoelace.style/1.0.0-beta24/shoelace.css">
+<link rel="stylesheet" href="style.css">
+
+<div class="container" id="app">
+    <h1 class="title">TodoApp</h1>
+
+    <div v-cloak class="loader initial-loader"></div>
+
+    <div v-cloak="">
+        <div class="mar-b-md">
+            <div v-if="todos.length === 0" class="alert">Nothing todo!</div>
+            <div v-for="todo in todos" class="todo">
+                <label class="todo__label">
+                    <input
+                        type="checkbox"
+                        class="todo__checkbox"
+                        v-model="todo.isCompleted"
+                        v-on:change="toggleTodo(todo.id)"
+                    >
+                    <s v-if="todo.isCompleted">{{ todo.description }}</s>
+                    <span v-if="!todo.isCompleted">{{ todo.description }}</span>
+                </label>
+            </div>
+        </div>
+    
+        <div class="mar-b-lg">
+            <div class="pad-b-l" v-if="todos.length > 0">
+                <h4>Completed</h4>
+                <div class="progress progress-xs">
+                    <div
+                        v-if="percentageCompleted > 0"
+                        class="progress-bar"
+                        v-bind:style="{ width: percentageCompleted + '%' }"
+                    >
+                        {{ percentageCompleted | percentage }}
+                    </div>
+                </div>
+            </div>
+    
+            <button
+                v-if="completed > 0"
+                v-on:click="clearTodos"
+                v-bind:class="{ 'button-loader': state.clearingTodos }"
+                :disabled="state.clearingTodos"
+                class="button-block button-success"
+                type="button"
+            >Clear completed</button>
+        </div>
+    
+        <form v-on:submit="addTodo">
+            <fieldset>
+                <legend>Add a Todo</legend>
+                
+                <div class="input-group">
+                    <label for="description" class="hide-xs-up">Description</label>
+                    <input
+                        :disabled="state.addingTodo"
+                        v-model="input.description"
+                        type="text"
+                        placeholder="My awesome Todo"
+                        id="description"
+                    >
+                    <button
+                        type="submit"
+                        v-bind:class="{ 'button-loader': state.addingTodo }"
+                        :disabled="state.addingTodo"
+                    >Add</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue"></script>
+<script src="/main.js"></script>

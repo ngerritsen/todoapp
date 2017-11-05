@@ -1,0 +1,41 @@
+[v-cloak] {
+    display: none;
+}
+
+.initial-loader {
+    display: none;
+}
+
+[v-cloak].initial-loader {
+    display: block;
+    margin: 7rem auto 0;
+}
+
+ul {
+    padding: 0;
+}
+
+.title {
+    margin: 1.6rem 0;
+}
+
+.todo {
+    border-bottom: 1px solid #eee;
+}
+
+.todo:first-child {
+    border-top: 1px solid #eee;
+}
+
+.todo__label {
+    display: block;
+    padding: 0.8rem 0;
+}
+
+.todo__label:hover {
+    cursor: pointer;
+}
+
+.todo__checkbox {
+    margin-right: 0.4rem;
+}
