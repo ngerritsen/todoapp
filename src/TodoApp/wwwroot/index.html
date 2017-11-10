@@ -20,7 +20,7 @@
                         type="checkbox"
                         class="todo__checkbox"
                         v-model="todo.isCompleted"
-                        v-on:change="toggleTodo(todo.id)"
+                        @change="toggleTodo(todo.id)"
                     >
                     <s v-if="todo.isCompleted">{{ todo.description }}</s>
                     <span v-if="!todo.isCompleted">{{ todo.description }}</span>
@@ -35,7 +35,7 @@
                     <div
                         v-if="percentageCompleted > 0"
                         class="progress-bar"
-                        v-bind:style="{ width: percentageCompleted + '%' }"
+                        :style="{ width: percentageCompleted + '%' }"
                     >
                         {{ percentageCompleted | percentage }}
                     </div>
@@ -44,15 +44,15 @@
     
             <button
                 v-if="completed > 0"
-                v-on:click="clearTodos"
-                v-bind:class="{ 'button-loader': state.clearingTodos }"
+                @click="clearTodos"
+                :class="{ 'button-loader': state.clearingTodos }"
                 :disabled="state.clearingTodos"
                 class="button-block button-success"
                 type="button"
             >Clear completed</button>
         </div>
     
-        <form v-on:submit="addTodo">
+        <form @submit="addTodo">
             <fieldset>
                 <legend>Add a Todo</legend>
                 
@@ -67,7 +67,7 @@
                     >
                     <button
                         type="submit"
-                        v-bind:class="{ 'button-loader': state.addingTodo }"
+                        :class="{ 'button-loader': state.addingTodo }"
                         :disabled="state.addingTodo"
                     >Add</button>
                 </div>
